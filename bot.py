@@ -14,7 +14,7 @@ response = requests.get(url, headers=headers)
 if response.status_code == 200:
     soup = BeautifulSoup(response.content, "html.parser")
     
-    # === Mutlu Player ÖZEL TASARIMI ===
+    # === Connect Plus ÖZEL TASARIMI ===
     html_ust = """
     
 
