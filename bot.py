@@ -21,7 +21,7 @@ if response.status_code == 200:
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mutlu Player - Günün Maçları</title>
+        <title>Connect Plus - Günün Maçları</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
             
