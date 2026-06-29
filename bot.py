@@ -8,39 +8,37 @@ headers = {
 }
 url = "https://m.sporx.com/tvdebugun/"
 
-print("Siteden veriler çekiliyor...")
+print("Siteden veriler Ã§ekiliyor...")
 response = requests.get(url, headers=headers)
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.content, "html.parser")
     
-    # === Connect Plus ÖZEL TASARIMI ===
+    # === Connect Plus Ã–ZEL TASARIMI ===
     html_ust = """
-    
-
     <!DOCTYPE html>
     <html lang="tr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Connect Plus - Günün Maçları</title>
+        <title>Connect Plus - GÃ¼nÃ¼n MaÃ§larÄ±</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
             
             * { box-sizing: border-box; }
             body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
             
-            /* Üst Başlık - Connect Plus Markası */
+            /* Ãœst BaÅŸlÄ±k - Connect Plus MarkasÄ± */
             .header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px 15px; text-align: center; border-bottom: 1px solid #334155; }
             .header-title { font-size: 24px; font-weight: 800; color: #0ea5e9; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
             .header-subtitle { font-size: 13px; color: #94a3b8; font-weight: 500; letter-spacing: 0.5px; }
             
-            /* Yuvarlak Hatlı Modern Sekmeler */
+            /* Yuvarlak HatlÄ± Modern Sekmeler */
             .tabs { display: flex; justify-content: center; gap: 8px; background: #0f172a; padding: 15px 10px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
             .tab-btn { flex: 1; max-width: 90px; background: #1e293b; border: 1px solid #334155; border-radius: 20px; font-size: 13px; color: #94a3b8; font-weight: 600; cursor: pointer; padding: 8px 5px; transition: all 0.3s ease; text-align: center; }
             .tab-btn.active { background: #0ea5e9; color: #fff; border-color: #0ea5e9; box-shadow: 0 0 12px rgba(14, 165, 233, 0.5); }
             
-            /* Havada Duran Kart Görünümü */
+            /* Havada Duran Kart GÃ¶rÃ¼nÃ¼mÃ¼ */
             #mac-listesi { padding: 15px; }
             .kutu { display: flex; align-items: center; background: #1e293b; margin-bottom: 12px; padding: 15px; border-radius: 16px; border-left: 5px solid #0ea5e9; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
             
@@ -54,7 +52,7 @@ if response.status_code == 200:
             
             .sag { min-width: 50px; text-align: right; margin-left: 10px; }
             
-            /* Yanıp Sönen Canlı Etiketi Animasyonu */
+            /* YanÄ±p SÃ¶nen CanlÄ± Etiketi Animasyonu */
             .canli { background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; display: inline-block; animation: pulse 2s infinite; }
             @keyframes pulse {
                 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
@@ -69,15 +67,15 @@ if response.status_code == 200:
     </head>
     <body>
         <div class="header">
-            <div class="header-title">📺 Connect Plus</div>
-            <div class="header-subtitle">Günün Maç Yayınları</div>
+            <div class="header-title">ðŸ“º Connect Plus</div>
+            <div class="header-subtitle">GÃ¼nÃ¼n MaÃ§ YayÄ±nlarÄ±</div>
         </div>
         
         <div class="tabs">
-            <button class="tab-btn active" onclick="filtrele('Tumu', this)">Tüm gün</button>
+            <button class="tab-btn active" onclick="filtrele('Tumu', this)">TÃ¼m gÃ¼n</button>
             <button class="tab-btn" onclick="filtrele('Futbol', this)">Futbol</button>
             <button class="tab-btn" onclick="filtrele('Basketbol', this)">Basketbol</button>
-            <button class="tab-btn" onclick="filtrele('Diger', this)">Diğer</button>
+            <button class="tab-btn" onclick="filtrele('Diger', this)">DiÄŸer</button>
         </div>
         <div id="mac-listesi">
     """
@@ -85,8 +83,8 @@ if response.status_code == 200:
     html_alt_ilk_kisim = """
         </div>
         <div class="alt-bilgi">
-            © 2026 <span class="marka-renk">Connect Plus</span> Özel Yayınıdır.<br>
-            Son Güncelleme: """
+            Â© 2026 <span class="marka-renk">Connect Plus</span> Ã–zel YayÄ±nÄ±dÄ±r.<br>
+            Son GÃ¼ncelleme: """
         
     html_alt_ikinci_kisim = """
         </div>
@@ -123,7 +121,7 @@ if response.status_code == 200:
             
         metin = satir.get_text(separator=" | ", strip=True)
         
-        if len(metin) > 150 or "Tüm gün | Futbol" in metin:
+        if len(metin) > 150 or "TÃ¼m gÃ¼n | Futbol" in metin:
             continue
             
         if re.search(r'\b\d{2}:\d{2}\b', metin):
@@ -133,9 +131,9 @@ if response.status_code == 200:
             if not saat: continue
                 
             is_live = False
-            if "Canlı" in parcalar:
+            if "CanlÄ±" in parcalar:
                 is_live = True
-                parcalar.remove("Canlı")
+                parcalar.remove("CanlÄ±")
             
             parcalar = [p for p in parcalar if p != saat]
             if len(parcalar) == 0: continue
@@ -159,7 +157,7 @@ if response.status_code == 200:
             elif "Basketbol" in mac_ismi or "BASKETBOL" in mac_ismi.upper():
                 kategori = "Basketbol"
             
-            canli_html = '<div class="canli">Canlı</div>' if is_live else ''
+            canli_html = '<div class="canli">CanlÄ±</div>' if is_live else ''
             logo_html = f'<img src="{logo_url}" class="kanal-logo">' if logo_url else ''
             
             html_orta += f"""
@@ -180,7 +178,7 @@ if response.status_code == 200:
             mac_sayisi += 1
 
     if mac_sayisi == 0:
-        html_orta = "<div style='text-align:center; padding: 30px; color:#94a3b8;'>Şu an için gösterilecek maç bulunamadı.</div>"
+        html_orta = "<div style='text-align:center; padding: 30px; color:#94a3b8;'>Åžu an iÃ§in gÃ¶sterilecek maÃ§ bulunamadÄ±.</div>"
 
     zaman = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
     tam_html = html_ust + html_orta + html_alt_ilk_kisim + zaman + html_alt_ikinci_kisim
@@ -188,7 +186,7 @@ if response.status_code == 200:
     with open("index.html", "w", encoding="utf-8") as dosya:
         dosya.write(tam_html)
         
-    print(f"Harika! Connect Plus tasarımıyla toplam {mac_sayisi} maç eklendi.")
+    print(f"Harika! Connect Plus tasarÄ±mÄ±yla toplam {mac_sayisi} maÃ§ eklendi.")
 
 else:
-    print(f"Bağlantı hatası: {response.status_code}")
+    print(f"BaÄŸlantÄ± hatasÄ±: {response.status_code}")
