@@ -4,24 +4,24 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Connect Plus - GÃ¼nÃ¼n MaÃ§larÄ±</title>
+        <title>Mutlu Player - Günün Maçları</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
             
             * { box-sizing: border-box; }
             body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
             
-            /* Ãœst BaÅŸlÄ±k - Connect Plus MarkasÄ± */
+            /* Üst Başlık - Mutlu Player Markası */
             .header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px 15px; text-align: center; border-bottom: 1px solid #334155; }
             .header-title { font-size: 24px; font-weight: 800; color: #0ea5e9; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
             .header-subtitle { font-size: 13px; color: #94a3b8; font-weight: 500; letter-spacing: 0.5px; }
             
-            /* Yuvarlak HatlÄ± Modern Sekmeler */
+            /* Yuvarlak Hatlı Modern Sekmeler */
             .tabs { display: flex; justify-content: center; gap: 8px; background: #0f172a; padding: 15px 10px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
             .tab-btn { flex: 1; max-width: 90px; background: #1e293b; border: 1px solid #334155; border-radius: 20px; font-size: 13px; color: #94a3b8; font-weight: 600; cursor: pointer; padding: 8px 5px; transition: all 0.3s ease; text-align: center; }
             .tab-btn.active { background: #0ea5e9; color: #fff; border-color: #0ea5e9; box-shadow: 0 0 12px rgba(14, 165, 233, 0.5); }
             
-            /* Havada Duran Kart GÃ¶rÃ¼nÃ¼mÃ¼ */
+            /* Havada Duran Kart Görünümü */
             #mac-listesi { padding: 15px; }
             .kutu { display: flex; align-items: center; background: #1e293b; margin-bottom: 12px; padding: 15px; border-radius: 16px; border-left: 5px solid #0ea5e9; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
             
@@ -35,7 +35,7 @@
             
             .sag { min-width: 50px; text-align: right; margin-left: 10px; }
             
-            /* YanÄ±p SÃ¶nen CanlÄ± Etiketi Animasyonu */
+            /* Yanıp Sönen Canlı Etiketi Animasyonu */
             .canli { background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; display: inline-block; animation: pulse 2s infinite; }
             @keyframes pulse {
                 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
@@ -50,15 +50,15 @@
     </head>
     <body>
         <div class="header">
-            <div class="header-title">ðŸ“º Connect Plus</div>
-            <div class="header-subtitle">GÃ¼nÃ¼n MaÃ§ YayÄ±nlarÄ±</div>
+            <div class="header-title">📺 Connect Plus</div>
+            <div class="header-subtitle">Günün Maç Yayınları</div>
         </div>
         
         <div class="tabs">
-            <button class="tab-btn active" onclick="filtrele('Tumu', this)">TÃ¼m gÃ¼n</button>
+            <button class="tab-btn active" onclick="filtrele('Tumu', this)">Tüm gün</button>
             <button class="tab-btn" onclick="filtrele('Futbol', this)">Futbol</button>
             <button class="tab-btn" onclick="filtrele('Basketbol', this)">Basketbol</button>
-            <button class="tab-btn" onclick="filtrele('Diger', this)">DiÄŸer</button>
+            <button class="tab-btn" onclick="filtrele('Diger', this)">Diğer</button>
         </div>
         <div id="mac-listesi">
     
@@ -69,10 +69,10 @@
                         <span class="kanal-isim">A Spor</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/A_Spor.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Sabah Sporu (Diğer) - Canlı</div>
+                    <div class="mac-isim">Sabah Sporu (Diğer)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -83,10 +83,10 @@
                         <span class="kanal-isim">A Spor</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/A_Spor.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Dünya Kupası’nda Bugün (Futbol) - Canlı</div>
+                    <div class="mac-isim">Dünya Kupası’nda Bugün (Futbol)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -139,10 +139,10 @@
                         <span class="kanal-isim">S Sport Plus</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport_Plus.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Wimbledon - Kort 1 Maç (Tenis) - Canlı</div>
+                    <div class="mac-isim">Wimbledon - Kort 1 Maç (Tenis)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -167,10 +167,10 @@
                         <span class="kanal-isim">S Sport Plus</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport_Plus.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Wimbledon - Kort 1 Maç 2 (Tenis) - Canlı</div>
+                    <div class="mac-isim">Wimbledon - Kort 1 Maç 2 (Tenis)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -209,10 +209,10 @@
                         <span class="kanal-isim">S Sport Plus</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport_Plus.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Wimbledon - Kort 1 Maç 3 (Tenis) - Canlı</div>
+                    <div class="mac-isim">Wimbledon - Kort 1 Maç 3 (Tenis)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -237,10 +237,10 @@
                         <span class="kanal-isim">TRT 1</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_1.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Brezilya vs Japonya (Futbol) - Canlı</div>
+                    <div class="mac-isim">Brezilya vs Japonya (Futbol)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -251,10 +251,10 @@
                         <span class="kanal-isim">A Spor</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/A_Spor.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Transfer Raporu (Futbol) - Canlı</div>
+                    <div class="mac-isim">Transfer Raporu (Futbol)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -265,10 +265,10 @@
                         <span class="kanal-isim">S Sport Plus</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport_Plus.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Dünya Kupası'nda Bugün (Futbol) - Canlı</div>
+                    <div class="mac-isim">Dünya Kupası'nda Bugün (Futbol)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
@@ -293,17 +293,17 @@
                         <span class="kanal-isim">TRT 1</span>
                         <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_1.png" class="kanal-logo">
                     </div>
-                    <div class="mac-isim">Almanya vs Paraguay (Futbol) - Canlı</div>
+                    <div class="mac-isim">Almanya vs Paraguay (Futbol)</div>
                 </div>
                 <div class="sag">
-                    
+                    <div class="canli">Canlı</div>
                 </div>
             </div>
             
         </div>
         <div class="alt-bilgi">
-            Â© 2026 <span class="marka-renk">Connect Plus</span> Ã–zel YayÄ±nÄ±dÄ±r.<br>
-            Son GÃ¼ncelleme: 29-06-2026 04:21
+            © 2026 <span class="marka-renk">Connect Plus</span> Özel Yayınıdır.<br>
+            Son Güncelleme: 29-06-2026 04:24
         </div>
         <script>
             function filtrele(kategori, btn) {
