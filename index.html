@@ -6,19 +6,799 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Connect Plus - Günün Maçları</title>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-            body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
-            .kutu { background: #1e293b; padding: 15px; margin-bottom: 10px; border-radius: 12px; border-left: 5px solid #0ea5e9; }
-            .alt-bilgi { text-align: center; color: #64748b; margin-top: 20px; font-size: 12px; }
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+            
+            * { box-sizing: border-box; }
+            body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
+            
+            /* Üst Başlık - Connect Plus Markası */
+            .header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px 15px; text-align: center; border-bottom: 1px solid #334155; }
+            .header-title { font-size: 24px; font-weight: 800; color: #0ea5e9; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+            .header-subtitle { font-size: 13px; color: #94a3b8; font-weight: 500; letter-spacing: 0.5px; }
+            
+            /* Yuvarlak Hatlı Modern Sekmeler */
+            .tabs { display: flex; justify-content: center; gap: 8px; background: #0f172a; padding: 15px 10px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+            .tab-btn { flex: 1; max-width: 90px; background: #1e293b; border: 1px solid #334155; border-radius: 20px; font-size: 13px; color: #94a3b8; font-weight: 600; cursor: pointer; padding: 8px 5px; transition: all 0.3s ease; text-align: center; }
+            .tab-btn.active { background: #0ea5e9; color: #fff; border-color: #0ea5e9; box-shadow: 0 0 12px rgba(14, 165, 233, 0.5); }
+            
+            /* Havada Duran Kart Görünümü */
+            #mac-listesi { padding: 15px; }
+            .kutu { display: flex; align-items: center; background: #1e293b; margin-bottom: 12px; padding: 15px; border-radius: 16px; border-left: 5px solid #0ea5e9; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+            
+            .saat { color: #38bdf8; font-size: 22px; font-weight: 700; min-width: 65px; border-right: 1px solid #334155; margin-right: 12px; }
+            
+            .orta { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+            .kanal-satiri { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+            .kanal-isim { color: #f1f5f9; font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .kanal-logo { height: 22px; max-width: 60px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; }
+            .mac-isim { color: #94a3b8; font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            
+            .sag { min-width: 50px; text-align: right; margin-left: 10px; }
+            
+            /* Yanıp Sönen Canlı Etiketi Animasyonu */
+            .canli { background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; display: inline-block; animation: pulse 2s infinite; }
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+                70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            }
+            
+            .gizli { display: none !important; }
+            .alt-bilgi { text-align: center; color: #64748b; font-size: 12px; margin: 20px 0 40px 0; font-weight: 500; line-height: 1.6; }
+            .marka-renk { color: #0ea5e9; font-weight: bold; }
         </style>
     </head>
     <body>
+        <div class="header">
+            <div class="header-title">📺 Connect Plus</div>
+            <div class="header-subtitle">Günün Maç Yayınları</div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="filtrele('Tumu', this)">Tüm gün</button>
+            <button class="tab-btn" onclick="filtrele('Futbol', this)">Futbol</button>
+            <button class="tab-btn" onclick="filtrele('Basketbol', this)">Basketbol</button>
+            <button class="tab-btn" onclick="filtrele('Diger', this)">Diğer</button>
+        </div>
         <div id="mac-listesi">
-            <!-- Maçlar buraya gelecek -->
+    
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">07:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">İtalya Serie A (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">07:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Voleybol Nations League Erkekler (Voleybol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">07:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">SP Contenders 1.Sezon 7. Bölüm (Diğer)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">07:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Futbolun En Büyük Sahnesi (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">08:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">SP Contenders 1.Sezon 8. Bölüm (Diğer)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">08:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Futbolun En Büyük Sahnesi (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">09:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Inside Sailing (Diğer)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">09:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Başlama Vuruşu (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">09:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Tenis Klasik Maç (Tenis)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">09:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">İlk Baskı (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">09:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Moto 2 (Motor Sporları)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Basketbol">
+                <div class="saat">09:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">EuroLeague (Basketbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">10:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">İşitme Engelliler Spor Bülteni (Diğer)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">10:15</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">2026 Dünya Kupası Özetler (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">10:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Voleybol Nations League Kadınlar (Voleybol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">11:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Spor Manşet (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">11:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">HT Spor Gündem (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">11:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Moto 2 (Motor Sporları)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">12:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Monster Jam (Diğer)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">12:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Hollanda - Fas (Futbol) - Tekrar</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">12:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Football Nation (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">12:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kürsü (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">13:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Wimbledon Tenis Turnuvası (Tenis)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">13:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Wimbledon Tenis Turnuvası (Tenis)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">13:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">BeIN Haber</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Bein_Sports_Haber.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">beIN Gün Ortası (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">13:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Bakış Açısı (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">14:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Spor Stüdyosu (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">15:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">Tivibu Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Tivibu_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupa Bülteni (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">15:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Satır Arası (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">15:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">2026 Dünya Kupası Özetler (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">15:30</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">Tivibu Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Tivibu_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupa Günlüğü (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">16:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Gündem Futbol (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">17:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Brezilya - Japonya (Futbol) - Tekrar</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">18:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">BeIN Haber</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Bein_Sports_Haber.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">beIN Ana Haber (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">18:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">Tivibu Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Tivibu_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Tivibu Ana Haber (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">18:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">HT Spor Ana Haber (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">19:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Dünya Kupası Özel (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">19:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">Tivibu Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Tivibu_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupa Yolu (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">19:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupa Saati (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">19:55</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor Yıldız</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor_Yildiz.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">2026 Wimbledon Tenis Turnuvası (Tenis)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">20:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Nokta Transfer (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">20:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT 1</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_1.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Fildişi Sahili - Norveç (Futbol)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">20:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Almanya - Paraguay (Futbol) - Tekrar</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">22:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport 2</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport2.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">İtalya Serie A (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">22:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">HT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/HT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Gece Yarısı (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">22:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupada Bugün (Futbol)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">22:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Kupa Saati (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">22:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">Tivibu Spor</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/Tivibu_Spor.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Transfer Market (Futbol)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Diger">
+                <div class="saat">23:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">S Sport</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/S_Sport.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Moto GP (Motor Sporları)</div>
+                </div>
+                <div class="sag">
+                    
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">00:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT 1</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_1.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Fransa - İsveç (Futbol)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
+            <div class="kutu" data-kategori="Futbol">
+                <div class="saat">04:00</div>
+                <div class="orta">
+                    <div class="kanal-satiri">
+                        <span class="kanal-isim">TRT 1</span>
+                        <img src="https://www.sporx.com/_img/day-summaries/channel/TRT_1.png" class="kanal-logo">
+                    </div>
+                    <div class="mac-isim">Meksika - Ekvador (Futbol)</div>
+                </div>
+                <div class="sag">
+                    <div class="canli">Canlı</div>
+                </div>
+            </div>
+            
         </div>
         <div class="alt-bilgi">
-            © 2026 Connect Plus | Son Güncelleme: 30-06-2026 03:43
+            © 2026 <span class="marka-renk">Connect Plus</span> Özel Yayınıdır.<br>
+            Son Güncelleme: 30-06-2026 02:07
         </div>
+        <script>
+            function filtrele(kategori, btn) {
+                var butonlar = document.getElementsByClassName("tab-btn");
+                for (var i = 0; i < butonlar.length; i++) {
+                    butonlar[i].classList.remove("active");
+                }
+                btn.classList.add("active");
+                
+                var maclar = document.getElementsByClassName("kutu");
+                for (var i = 0; i < maclar.length; i++) {
+                    if (kategori === 'Tumu' || maclar[i].getAttribute("data-kategori") === kategori) {
+                        maclar[i].classList.remove("gizli");
+                    } else {
+                        maclar[i].classList.add("gizli");
+                    }
+                }
+            }
+        </script>
     </body>
     </html>
     
