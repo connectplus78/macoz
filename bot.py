@@ -186,7 +186,7 @@ if response.status_code == 200:
     with open("index.html", "w", encoding="utf-8") as dosya:
         dosya.write(tam_html)
         
-    print(f"Harika! İnadına TV tasarımıyla toplam {mac_sayisi} maç eklendi.")
+    print(f"Harika! Connect Plus tasarımıyla toplam {mac_sayisi} maç eklendi.")
 
 else:
     print(f"Bağlantı hatası: {response.status_code}")
