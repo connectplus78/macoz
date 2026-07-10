@@ -2,12 +2,17 @@ name: Mac Botu Otomatik Calistir
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Her saat başı çalışır
-  workflow_dispatch:     # Manuel tıklama ile de çalışır
+    - cron: '0 * * * *'  # Hala her saat başı çalışır
+  workflow_dispatch:     
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # === SAAT DÜZELTME EKLEMESİ ===
+    env:
+      TZ: Europe/Istanbul
+    # ==============================
 
     permissions:
       contents: write
